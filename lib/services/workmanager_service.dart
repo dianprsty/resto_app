@@ -22,7 +22,7 @@ class WorkmanagerService {
       : _workmanager = workmanager ??= Workmanager();
 
   Future<void> init() async {
-    await _workmanager.initialize(callbackDispatcher, isInDebugMode: true);
+    await _workmanager.initialize(callbackDispatcher, isInDebugMode: false);
   }
 
   Future<void> runOneOffTask({Duration initDelay = Duration.zero}) async {
