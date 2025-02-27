@@ -41,6 +41,14 @@ class RestaurantCard extends StatelessWidget {
                   tag: restaurant.pictureId,
                   child: Image.network(
                     getImageUrl(id: restaurant.pictureId),
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return Center(child: const CircularProgressIndicator());
+                    },
+                    errorBuilder: (context, error, stackTrace) {
+                      return Image.asset(
+                          getLocalImagePath(name: "placeholder.png"));
+                    },
                     fit: BoxFit.cover,
                   ),
                 ),

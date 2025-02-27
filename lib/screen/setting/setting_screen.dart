@@ -62,6 +62,31 @@ class _SettingScreenState extends State<SettingScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
+                    "Permission",
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  ElevatedButton(
+                    onPressed: () async {
+                      await _requestPermission();
+                    },
+                    child: Consumer<LocalNotificationProvider>(
+                      builder: (context, value, child) {
+                        return Text(
+                          value.permission != null &&
+                                  (value.permission ?? false)
+                              ? 'Granted'
+                              : 'Not Allowed',
+                          textAlign: TextAlign.center,
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
                     "Lunch Reminder",
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
@@ -74,70 +99,17 @@ class _SettingScreenState extends State<SettingScreen> {
                 ],
               ),
               ElevatedButton(
-                onPressed: () async {
-                  await _requestPermission();
-                },
-                child: Consumer<LocalNotificationProvider>(
-                  builder: (context, value, child) {
-                    return Text(
-                      "Request permission! (${value.permission})",
-                      textAlign: TextAlign.center,
-                    );
-                  },
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  await _showNotification();
-                },
-                child: const Text(
-                  "Show notification with payload and custom sound",
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  await _scheduleLunchReminder();
-                },
-                child: const Text(
-                  "Schedule daily 10:00:00 am notification",
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  await _checkPendingNotificationRequests();
-                },
-                child: const Text(
-                  "Check pending notifications",
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              ElevatedButton(
                 onPressed: () {
                   _runBackgroundOneOffTask();
                 },
-                child: const Text(
-                  "Run a task in background",
-                  textAlign: TextAlign.center,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Theme.of(context).colorScheme.primary,
                 ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  _runBackgroundPeriodicTask();
-                },
-                child: const Text(
-                  "Run a task periodically in background",
+                child: Text(
+                  "Test Run notification",
                   textAlign: TextAlign.center,
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  _cancelAllTaskInBackground();
-                },
-                child: const Text(
-                  "Cancel all task in background",
-                  textAlign: TextAlign.center,
+                  style:
+                      TextStyle(color: Theme.of(context).colorScheme.onPrimary),
                 ),
               ),
             ],
@@ -151,88 +123,11 @@ class _SettingScreenState extends State<SettingScreen> {
     context.read<WorkmanagerService>().runOneOffTask();
   }
 
-  void _runBackgroundPeriodicTask() async {
-    // context.read<WorkmanagerService>().runPeriodicTask();
-  }
-
-  void _cancelAllTaskInBackground() async {
-    context.read<WorkmanagerService>().cancelAllTask();
-  }
-
   Future<void> _requestPermission() async {
     context.read<LocalNotificationProvider>().requestPermissions();
   }
 
-  Future<void> _showNotification() async {
-    context.read<LocalNotificationProvider>().showNotification();
-  }
-
   Future<void> _scheduleLunchReminder() async {
     context.read<LocalNotificationProvider>().scheduleLunchReminder();
-  }
-
-  Future<void> _checkPendingNotificationRequests() async {
-    final localNotificationProvider = context.read<LocalNotificationProvider>();
-
-    if (!mounted) {
-      return;
-    }
-
-    return showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        final pendingData = context.select(
-            (LocalNotificationProvider provider) =>
-                provider.pendingNotificationRequests);
-        return AlertDialog(
-          title: Text(
-            '${pendingData.length} pending notification requests',
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-          content: SizedBox(
-            height: 300,
-            width: 300,
-            child: ListView.builder(
-              itemCount: pendingData.length,
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                // todo-03-action-05: iterate a listtile
-                final item = pendingData[index];
-                return ListTile(
-                  title: Text(
-                    item.title ?? "",
-                    // maxLines: 1,
-                    // overflow: TextOverflow.ellipsis,
-                  ),
-                  subtitle: Text(
-                    item.body ?? "",
-                    // maxLines: 1,
-                    // overflow: TextOverflow.ellipsis,
-                  ),
-                  contentPadding: EdgeInsets.zero,
-                  trailing: IconButton(
-                    onPressed: () {
-                      // localNotificationProvider
-                      //   ..cancelNotification(item.id)
-                      //   ..checkPendingNotificationRequests(context);
-                    },
-                    icon: const Icon(Icons.delete_outline),
-                  ),
-                );
-              },
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('OK'),
-            ),
-          ],
-        );
-      },
-    );
   }
 }

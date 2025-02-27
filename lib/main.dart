@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
 import 'package:restauran_submission_1/data/api/api_services.dart';
 import 'package:restauran_submission_1/provider/detail/restaurant_detail_provider.dart';
@@ -90,7 +89,6 @@ void main() async {
       create: (context) => LocalNotificationProvider(
         context.read<LocalNotificationService>(),
         context.read<SharedPreferencesService>(),
-        context.read<ApiServices>(),
         context.read<WorkmanagerService>(),
       )
         ..requestPermissions()
