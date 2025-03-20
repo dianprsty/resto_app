@@ -21,6 +21,16 @@ A Flutter-based restaurant application that allows users to browse restaurants, 
 - **UI Enhancements**: Google Fonts & Lottie Animations
 - **Background Tasks**: WorkManager & Flutter Local Notifications
 
+## Requirements
+
+Before running this project, ensure you have the following installed:
+
+- Flutter SDK (minimum version **3.6.1**)
+- Dart SDK
+- Android Studio or Visual Studio Code with Flutter extension
+- Android Emulator or a physical device
+- Internet connection for fetching restaurant data
+
 ## Installation
 
 1. Clone the repository:
