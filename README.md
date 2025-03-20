@@ -52,17 +52,13 @@ Before running this project, ensure you have the following installed:
 
 ## Screenshots
 
-| Home Screen                                | Restaurant Details                       | Restaurant Detail                         |
-| ------------------------------------------ | ---------------------------------------- | ----------------------------------------- |
-| ![Home Screen](assets/screenshot/home.png) | ![Details](assets/screenshot/detail.png) | ![Details](assets/screenshot/detail2.png) |
-
-| Search Screen                                  | Setting Screen                           | Favorite Screen                                    |
-| ---------------------------------------------- | ---------------------------------------- | -------------------------------------------------- |
-| ![Search Screen](assets/screenshot/search.png) | ![Setting](assets/screenshot/detail.png) | ![Favorite Screen](assets/screenshot/favorite.png) |
-
-| Loading Screen                                | Empty Screen                            | Splash Screen                            |
-| --------------------------------------------- | --------------------------------------- | ---------------------------------------- |
-| ![Home Screen](assets/screenshot/loading.png) | ![Details](assets/screenshot/empty.png) | ![Details](assets/screenshot/splash.png) |
+| Home Screen                                    | Restaurant Details                        | Restaurant Detail                                  |
+| ---------------------------------------------- | ----------------------------------------- | -------------------------------------------------- |
+| ![Home Screen](assets/screenshot/home.png)     | ![Details](assets/screenshot/detail.png)  | ![Details](assets/screenshot/detail2.png)          |
+| Search Screen                                  | Setting Screen                            | Favorite Screen                                    |
+| ![Search Screen](assets/screenshot/search.png) | ![Setting](assets/screenshot/setting.png) | ![Favorite Screen](assets/screenshot/favorite.png) |
+| Loading Screen                                 | Empty Screen                              | Splash Screen                                      |
+| ![Home Screen](assets/screenshot/loading.png)  | ![Details](assets/screenshot/empty.png)   | ![Details](assets/screenshot/splash.png)           |
 
 ## Contributions
 
